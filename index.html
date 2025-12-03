@@ -9,43 +9,112 @@
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      background: #b3d9ff; /* BABY BLUE */
-      color: #003366;
       font-family: Arial, sans-serif;
+      background: #b3d9ff; /* baby blue */
+      color: #003366;
+      line-height: 1.6;
+    }
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    header {
       text-align: center;
+      padding: 60px 20px;
+      background: #b3d9ff;
     }
 
-    .container {
-      max-width: 600px;
-      padding: 20px;
-    }
-
-    h1 {
+    header h1 {
       font-size: 3rem;
       margin-bottom: 10px;
       font-weight: bold;
     }
 
-    p {
+    header p {
       font-size: 1.2rem;
-      margin-top: 10px;
-      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    section {
+      background: white;
+      margin: 30px auto;
+      padding: 40px 25px;
+      border-radius: 12px;
+      max-width: 800px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #002244;
+    }
+
+    section p {
+      font-size: 1.1rem;
+      color: #003366;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #002244;
+      padding: 25px;
+      margin-top: 40px;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+
+  <!-- Intro Header -->
+  <header>
     <h1>Newsight</h1>
     <p>
-      This is a student-led, non-profit project that aims to use AI-powered glasses  
+      This is a student-led, non-profit project that aims to use AI-powered glasses 
       to support and empower the vision-impaired community.
     </p>
-  </div>
+  </header>
+
+  <!-- SECTION: About Us -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>
+      Newsight is a student-driven initiative dedicated to creating accessible, 
+      affordable, and effective tools for individuals with vision impairments. 
+      Our mission is to combine modern AI technologies with thoughtful design 
+      to improve independence and daily experiences for the visually impaired community.
+    </p>
+  </section>
+
+  <!-- SECTION: Newsight Glasses Version 1 -->
+  <section id="version1">
+    <h2>Newsight Glasses — Version 1</h2>
+    <p>
+      Version 1 of our Newsight glasses is currently in concept development. 
+      Our goals include:
+      <br><br>
+      • Real-time object recognition<br>
+      • Text-to-speech reading<br>
+      • Obstacle detection<br>
+      • Item-locating assistance<br><br>
+      As development progresses, we will share updates, prototypes, and demos 
+      to showcase the evolution of our technology.
+    </p>
+  </section>
+
+  <!-- SECTION: Contact Us -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>
+      Interested in collaborating, supporting the project, or learning more?<br>
+      Email us at:  
+      <strong>your-email@example.com</strong>
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Newsight • Student-led Non-Profit Project
+  </footer>
+
 </body>
 </html>
