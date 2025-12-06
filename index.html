@@ -6,183 +6,583 @@
   <title>Newsight – AI Glasses for Vision Support</title>
 
   <style>
-    /* ---------- GLOBAL ---------- */
+    /* ---------- BASE ---------- */
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.16);
+      --glass-border: rgba(255, 255, 255, 0.55);
+      --text-main: #1f2b3a;
+      --text-soft: #5f6c80;
+      --accent: #6c8dff;
+      --accent-soft: #edf1ff;
+      --radius-lg: 22px;
+      --transition-fast: 0.22s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      padding: 0;
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      background: #f6f8fc; /* soft pastel gray */
-      color: #3a4a5a;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-main);
       line-height: 1.7;
+      background: radial-gradient(circle at 0% 0%, #ffe8f3 0, #f6f8ff 35%, #e0f8ff 70%, #f5f6ff 100%);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3 {
-      font-weight: 600;
-      letter-spacing: 0.3px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    p {
-      margin: 0 0 15px;
-      font-weight: 300;
-    }
-
-    /* Pastel Palette */
-    :root {
-      --pastel-blue: #cfe4ff;
-      --pastel-pink: #ffd8e8;
-      --pastel-green: #dff5e8;
-      --pastel-purple: #e6ddff;
-      --soft-white: #ffffffd5;
-    }
-
-    /* ---------- HEADER ---------- */
-    header {
-      text-align: center;
-      padding: 90px 20px 70px;
-      background: var(--pastel-blue);
-      border-bottom: 1px solid #d0dff0;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      color: #2d3b52;
-    }
-
-    header p {
-      max-width: 650px;
+    /* ---------- LAYOUT WRAPPER ---------- */
+    .page {
+      max-width: 1100px;
       margin: 0 auto;
-      font-size: 1.15rem;
-      opacity: 0.85;
+      padding: 24px 18px 80px;
     }
 
-    /* ---------- SECTION CARD STYLE ---------- */
-    section {
-      background: var(--soft-white);
-      backdrop-filter: blur(6px);
-      margin: 40px auto;
-      padding: 45px 32px;
-      max-width: 860px;
-      border-radius: 20px;
-      border: 1px solid #e6e9ef;
-      box-shadow: 0 8px 16px rgba(180, 190, 200, 0.15);
+    /* ---------- NAV ---------- */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 26px;
+      position: sticky;
+      top: 16px;
+      z-index: 20;
     }
 
-    section h2 {
-      font-size: 1.9rem;
-      margin-bottom: 18px;
-      color: #2d3b52;
+    .nav-glass {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 14px 34px rgba(110, 140, 190, 0.22);
     }
 
-    ul {
-      padding-left: 20px;
-      line-height: 1.75;
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
+      background: conic-gradient(from 200deg, #7ea8ff, #ffd6e7, #b3ffd5, #7ea8ff);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .nav-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #28334a;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .nav-link {
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.8);
+      color: #2a3a5e;
+      transform: translateY(-1px);
+    }
+
+    .nav-pill {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #31427a;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(146, 168, 255, 0.6);
+    }
+
+    .nav-pill span {
+      font-size: 0.78rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: white;
+    }
+
+    /* ---------- HEADER HERO ---------- */
+    header.hero {
+      margin-top: 40px;
+      margin-bottom: 34px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    @media (max-width: 840px) {
+      header.hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-text {
+      padding-right: 12px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(230, 235, 255, 0.9);
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #7ae1af;
+      box-shadow: 0 0 0 4px rgba(122, 225, 175, 0.18);
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 2.9rem);
+      margin: 0 0 12px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      max-width: 480px;
+      color: var(--text-soft);
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #6f8bff, #9b7dff);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(94, 121, 255, 0.4);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 18px 34px rgba(94, 121, 255, 0.5);
+    }
+
+    .btn-ghost {
+      padding: 9px 17px;
+      border-radius: 999px;
+      border: 1px solid rgba(164, 180, 210, 0.9);
+      background: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      margin-top: 14px;
+      font-size: 0.8rem;
+      color: #7b8599;
+    }
+
+    .hero-meta span {
+      font-weight: 500;
+      color: #4a5bb0;
+    }
+
+    /* Hero glass card on right */
+    .hero-card {
+      border-radius: 30px;
+      padding: 22px 20px;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.55));
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 22px 50px rgba(140, 160, 210, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.78rem;
+    }
+
+    .hero-chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(244, 246, 255, 0.9);
+      border: 1px solid rgba(210, 220, 255, 0.8);
+      color: #4c5a88;
+    }
+
+    .hero-metric {
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .hero-metric span {
+      display: block;
+    }
+
+    .hero-metric strong {
+      font-size: 1rem;
+      color: #2c3d6a;
+    }
+
+    .hero-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(180, 196, 230, 0.7), transparent);
+      margin: 4px 0 6px;
+    }
+
+    .hero-note {
+      font-size: 0.78rem;
+      color: #76829c;
+    }
+
+    /* ---------- CONTENT SECTIONS (GLASS CARDS) ---------- */
+    .glass-section {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 16px 40px rgba(130, 150, 200, 0.22);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .glass-section:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 24px 54px rgba(120, 145, 205, 0.32);
+    }
+
+    .glass-section h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.6rem;
+    }
+
+    .glass-section small {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #8b94aa;
+    }
+
+    .glass-section p {
+      color: var(--text-soft);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 760px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .feature-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 16px;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+
+    .feature-list li::before {
+      content: "•";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      font-size: 1.1rem;
+      color: #7a93ff;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 0.78rem;
+    }
+
+    .tag-pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(205, 215, 240, 0.95);
+      background: rgba(248, 250, 255, 0.95);
+      color: #5a6687;
+    }
+
+    /* ---------- CONTACT BLOCK ---------- */
+    .contact-line {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+
+    .contact-chip {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(210, 220, 255, 0.85);
+      font-weight: 500;
+      color: #34416d;
     }
 
     /* ---------- FOOTER ---------- */
     footer {
+      margin-top: 46px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(210, 220, 240, 0.9);
+      font-size: 0.82rem;
+      color: #737f96;
       text-align: center;
-      background: var(--pastel-purple);
-      padding: 40px 20px;
-      margin-top: 70px;
-      border-top: 1px solid #d7caef;
     }
 
-    footer h3 {
-      margin: 0;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #3b2d52;
+    footer strong {
+      color: #45527a;
     }
-
-    footer p {
-      font-size: 0.95rem;
-      margin: 6px 0;
-      opacity: 0.8;
-    }
-
-    footer hr {
-      width: 55%;
-      margin: 25px auto;
-      border: none;
-      border-top: 1px solid #ccbde7;
-    }
-
   </style>
 </head>
 
 <body>
-  <!-- HEADER -->
-  <header>
-    <h1>Newsight</h1>
-    <p>
-      A student-led nonprofit developing AI glasses to support and empower  
-      the vision-impaired community.
-    </p>
-  </header>
+  <div class="page">
+    <!-- NAVBAR -->
+    <div class="nav">
+      <div class="nav-glass">
+        <div class="nav-left">
+          <div class="logo-dot"></div>
+          <div class="nav-title">NEWSIGHT</div>
+        </div>
+        <div class="nav-links">
+          <div class="nav-link"><a href="#about">About</a></div>
+          <div class="nav-link"><a href="#version1">Glasses v1</a></div>
+          <div class="nav-link"><a href="#contact">Contact</a></div>
+          <div class="nav-pill">
+            Nonprofit
+            <span>Student-led</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <!-- ABOUT US -->
-  <section id="about">
-    <h2>About Us</h2>
-    <p>
-      Newsight is dedicated to creating AI-powered assistive eyewear that 
-      enhances mobility, independence, and daily life for individuals with 
-      visual impairments. Through user-centered design and modern AI vision 
-      models, we aim to build thoughtful and accessible tools.
-    </p>
-  </section>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          AI glasses for vision support · Early prototype
+        </div>
+        <h1 class="hero-title">Making the world more readable, one frame at a time.</h1>
+        <p class="hero-subtitle">
+          Newsight is a student-led nonprofit using AI-powered glasses to support
+          and empower the vision-impaired community with real-time assistance.
+        </p>
 
-  <!-- GLASSES VERSION 1 -->
-  <section id="version1">
-    <h2>Newsight Glasses — Version 1 (GLV-024P)</h2>
-    <p>
-      Our first-generation device is built on the GLV-024P smart eyewear 
-      platform, equipped with advanced camera, audio, and AI processing 
-      systems for real-time recognition and assistance.
-    </p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            Get in touch
+          </button>
+          <button class="btn-ghost" onclick="document.getElementById('version1').scrollIntoView({behavior:'smooth'})">
+            Explore Version 1
+          </button>
+        </div>
 
-    <h3>Key Hardware Features</h3>
-    <ul>
-      <li>📷 8MP wide-angle camera, 1080p video, stabilization</li>
-      <li>🎤 4-microphone array with noise reduction</li>
-      <li>🔊 Dual stereo speakers</li>
-      <li>🧠 AI-model support for recognition tasks</li>
-      <li>💾 32GB storage</li>
-      <li>🌐 Wi-Fi 6 + fast transfer</li>
-      <li>🔋 Long battery life with charging case</li>
-      <li>🕹️ Physical control buttons</li>
-      <li>🎙️ Voice commands (“Take a photo”, “Start video”)</li>
-    </ul>
+        <div class="hero-meta">
+          Built on <span>GLV-024P</span> · Focused on <span>accessibility</span> and <span>affordability</span>
+        </div>
+      </div>
 
-    <h3>Newsight Software Features</h3>
-    <ul>
-      <li>🧭 Obstacle detection & warnings</li>
-      <li>🔊 Real-time environment narration</li>
-      <li>📖 Text-to-speech for signs, screens, printed pages</li>
-      <li>🔍 Smart item-finding system</li>
-      <li>🤝 Community-driven improvements</li>
-    </ul>
-  </section>
+      <div class="hero-card">
+        <div class="hero-chip-row">
+          <div class="hero-chip">Obstacle alerts</div>
+          <div class="hero-chip">Text-to-speech</div>
+          <div class="hero-chip">Object recognition</div>
+        </div>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>
-      For questions, collaboration, or support:<br>
-      <strong>nikil26priv@gmail.com</strong>
-    </p>
-  </section>
+        <div class="hero-divider"></div>
 
-  <!-- FOOTER -->
-  <footer>
-    <h3>Newsight</h3>
-    <p>Designed to make the world more accessible.</p>
-    <p><strong>nikil26priv@gmail.com</strong></p>
+        <div class="hero-metric">
+          <span>
+            Prototype<br />
+            <strong>Version 1</strong>
+          </span>
+          <span>
+            Platform<br />
+            <strong>GLV-024P</strong>
+          </span>
+          <span>
+            Focus<br />
+            <strong>Low vision</strong>
+          </span>
+        </div>
 
-    <hr>
+        <p class="hero-note">
+          Hardware handles capture and audio. Newsight’s software layer is
+          designed specifically for navigation, reading, and daily assistance
+          for people with visual impairments.
+        </p>
+      </div>
+    </header>
 
-    <p style="font-size: 0.85rem;">© 2025 Newsight • All Rights Reserved</p>
-  </footer>
+    <!-- ABOUT -->
+    <section id="about" class="glass-section">
+      <small>About</small>
+      <h2>About Newsight</h2>
+      <p>
+        Newsight is dedicated to creating AI-powered assistive eyewear that
+        is practical, accessible, and supportive for individuals with visual
+        impairments. We combine contemporary vision models with human-centered
+        design to enhance mobility, independence, and everyday experiences.
+      </p>
 
+      <div class="tag-row">
+        <div class="tag-pill">Nonprofit initiative</div>
+        <div class="tag-pill">Student-led team</div>
+        <div class="tag-pill">Assistive technology</div>
+      </div>
+    </section>
+
+    <!-- VERSION 1 / HARDWARE + SOFTWARE -->
+    <section id="version1" class="glass-section">
+      <small>Prototype</small>
+      <h2>Newsight Glasses — Version 1 (GLV-024P)</h2>
+      <p>
+        Our first-generation Newsight glasses are built on the GLV-024P
+        multifunctional smart eyewear platform. This base provides robust
+        camera, audio, and connectivity features that Newsight extends with
+        accessibility-focused software.
+      </p>
+
+      <div class="two-col" style="margin-top: 18px;">
+        <div>
+          <h3>Hardware Foundations</h3>
+          <ul class="feature-list">
+            <li>8MP wide-angle camera with 1080p video and stabilization</li>
+            <li>4-microphone array with noise reduction for clear voice control</li>
+            <li>Dual stereo speakers for prompts, narration, and calls</li>
+            <li>AI large-model support for visual understanding</li>
+            <li>32GB internal storage for photos and recordings</li>
+            <li>Wi-Fi 6 and fast data transfer options</li>
+            <li>All-day battery with glasses cell + charging case</li>
+            <li>Physical buttons for quick control and AI mode exit</li>
+            <li>Voice commands such as “Take a photo” or “Start video”</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Newsight Software Layer</h3>
+          <ul class="feature-list">
+            <li>Obstacle detection with gentle audio cues</li>
+            <li>Real-time environment narration for orientation</li>
+            <li>Text-to-speech for signs, screens, and printed pages</li>
+            <li>Item-finding support (e.g., “Where are my keys?”)</li>
+            <li>Iterative features shaped by community testing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="glass-section">
+      <small>Contact</small>
+      <h2>Contact & Collaboration</h2>
+      <p>
+        We welcome collaborators, mentors, and testers from the
+        vision-impaired community, accessibility researchers, and anyone
+        interested in assistive AI.
+      </p>
+
+      <div class="contact-line">
+        <span>Reach us at</span>
+        <span class="contact-chip">nikil26priv@gmail.com</span>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>
+        © 2025 <strong>Newsight</strong> · Student-led nonprofit project using AI glasses 
+        to support the vision-impaired community.
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
