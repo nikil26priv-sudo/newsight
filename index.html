@@ -1,97 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Newsight – AI Glasses for Vision Support</title>
 
   <style>
+    /* ---------- GLOBAL ---------- */
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: #b3d9ff; /* baby blue */
-      color: #003366;
-      line-height: 1.6;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background: #f6f8fc; /* soft pastel gray */
+      color: #3a4a5a;
+      line-height: 1.7;
     }
 
-    /* HEADER */
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    p {
+      margin: 0 0 15px;
+      font-weight: 300;
+    }
+
+    /* Pastel Palette */
+    :root {
+      --pastel-blue: #cfe4ff;
+      --pastel-pink: #ffd8e8;
+      --pastel-green: #dff5e8;
+      --pastel-purple: #e6ddff;
+      --soft-white: #ffffffd5;
+    }
+
+    /* ---------- HEADER ---------- */
     header {
       text-align: center;
-      padding: 60px 20px;
+      padding: 90px 20px 70px;
+      background: var(--pastel-blue);
+      border-bottom: 1px solid #d0dff0;
     }
 
     header h1 {
       font-size: 3rem;
       margin-bottom: 10px;
-      font-weight: bold;
+      color: #2d3b52;
     }
 
     header p {
-      font-size: 1.2rem;
       max-width: 650px;
       margin: 0 auto;
+      font-size: 1.15rem;
+      opacity: 0.85;
     }
 
-    /* SECTION STYLE */
+    /* ---------- SECTION CARD STYLE ---------- */
     section {
-      background: white;
-      margin: 30px auto;
-      padding: 40px 25px;
-      border-radius: 12px;
-      max-width: 850px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      background: var(--soft-white);
+      backdrop-filter: blur(6px);
+      margin: 40px auto;
+      padding: 45px 32px;
+      max-width: 860px;
+      border-radius: 20px;
+      border: 1px solid #e6e9ef;
+      box-shadow: 0 8px 16px rgba(180, 190, 200, 0.15);
     }
 
     section h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-      color: #002244;
+      font-size: 1.9rem;
+      margin-bottom: 18px;
+      color: #2d3b52;
     }
 
     ul {
-      margin-top: 10px;
-      line-height: 1.7;
+      padding-left: 20px;
+      line-height: 1.75;
     }
 
-    /* FOOTER */
+    /* ---------- FOOTER ---------- */
     footer {
-      background: #e6f2ff;
-      padding: 30px 20px;
       text-align: center;
-      color: #003366;
-      border-top: 2px solid #aaccee;
-      margin-top: 40px;
+      background: var(--pastel-purple);
+      padding: 40px 20px;
+      margin-top: 70px;
+      border-top: 1px solid #d7caef;
     }
 
     footer h3 {
       margin: 0;
       font-size: 1.4rem;
-      font-weight: bold;
+      font-weight: 600;
+      color: #3b2d52;
     }
 
     footer p {
-      margin: 6px 0;
       font-size: 0.95rem;
+      margin: 6px 0;
+      opacity: 0.8;
     }
 
     footer hr {
-      width: 60%;
-      margin: 20px auto;
+      width: 55%;
+      margin: 25px auto;
       border: none;
-      border-top: 1px solid #aaccee;
+      border-top: 1px solid #ccbde7;
     }
+
   </style>
 </head>
 
 <body>
-
-  <!-- INTRO HEADER -->
+  <!-- HEADER -->
   <header>
     <h1>Newsight</h1>
     <p>
-      This is a student-led, nonprofit project using AI-powered glasses to support 
-      and empower the vision-impaired community.
+      A student-led nonprofit developing AI glasses to support and empower  
+      the vision-impaired community.
     </p>
   </header>
 
@@ -99,67 +125,50 @@
   <section id="about">
     <h2>About Us</h2>
     <p>
-      Newsight is dedicated to making AI-based visual assistance accessible and 
-      affordable. Our mission is to design wearable tools that improve mobility, 
-      independence, and everyday functioning for people with visual impairments.
-      Through modern AI vision models and user-centered design, we aim to build 
-      a next-generation assistive device for real-world use.
+      Newsight is dedicated to creating AI-powered assistive eyewear that 
+      enhances mobility, independence, and daily life for individuals with 
+      visual impairments. Through user-centered design and modern AI vision 
+      models, we aim to build thoughtful and accessible tools.
     </p>
   </section>
 
-  <!-- VERSION 1: GLV-024P -->
+  <!-- GLASSES VERSION 1 -->
   <section id="version1">
-    <h2>Newsight Glasses — Version 1 (GLV-024P Hardware Platform)</h2>
+    <h2>Newsight Glasses — Version 1 (GLV-024P)</h2>
     <p>
-      Our first-generation Newsight glasses are built directly on the GLV-024P, a 
-      multifunctional AI-powered smart eyewear model capable of photography, 
-      video recording, voice control, wireless connectivity, and real-time AI 
-      vision. This hardware serves as the base for all Newsight accessibility features.
+      Our first-generation device is built on the GLV-024P smart eyewear 
+      platform, equipped with advanced camera, audio, and AI processing 
+      systems for real-time recognition and assistance.
     </p>
 
     <h3>Key Hardware Features</h3>
     <ul>
-      <li>📷 <strong>8MP wide-angle camera</strong>, supports 1200MP photos and 1080p/25fps video, with stabilization - can successfully identify objects and texts.</li>
-      <li>🎤 <strong>4-microphone array</strong> with noise reduction for clearer audio and voice commands - allow responses through audio.</li>
-      <li>🔊 <strong>Dual stereo speakers</strong> for audio prompts, music, and communication.</li>
-      <li>🧠 <strong>AI large-model support</strong> for visual recognition, text reading, and smart interactions.</li>
-      <li>💾 <strong>32GB internal storage</strong>, holds ~300 photos and ~2 hours of video.</li>
-      <li>🌐 <strong>Wi-Fi 6 + USB simulation</strong> for fast transfer and phone connectivity.</li>
-      <li>🔋 <strong>Battery life:</strong>  
-          • 9 hours music playback  
-          • 1 hour video recording  
-          • 250mAh glasses battery + 3000mAh charging case (1-hour charge)  
-      </li>
-      <li>🕹️ <strong>Physical buttons</strong> for photo, video, music, call control, and AI mode exit.</li>
-      <li>🎙️ <strong>Voice commands</strong> including: “Hey Siri”, “Hey Luky”, “Take a photo”, 
-          “Start video”, “Volume up”, “Answer call”, etc.</li>
+      <li>📷 8MP wide-angle camera, 1080p video, stabilization</li>
+      <li>🎤 4-microphone array with noise reduction</li>
+      <li>🔊 Dual stereo speakers</li>
+      <li>🧠 AI-model support for recognition tasks</li>
+      <li>💾 32GB storage</li>
+      <li>🌐 Wi-Fi 6 + fast transfer</li>
+      <li>🔋 Long battery life with charging case</li>
+      <li>🕹️ Physical control buttons</li>
+      <li>🎙️ Voice commands (“Take a photo”, “Start video”)</li>
     </ul>
 
-    <h3>Newsight Software (APP) Layer</h3>
-    <p>
-      On top of GLV-024P’s strong hardware capabilities, Newsight adds accessibility-focused 
-      features tailored for the visually impaired:
-    </p>
-
+    <h3>Newsight Software Features</h3>
     <ul>
-      <li>🧭 Obstacle detection & warning cues</li>
-      <li>🔊 Real-time environment narration ("there is a tree infront")</li>
-      <li>📖 Text-to-speech for signs, screens, and printed pages</li>
-      <li>🔍 Item-finding memory (“Where did I put my keys?”)</li>
-      <li>🤝 Community-driven improvements and open testing</li>
+      <li>🧭 Obstacle detection & warnings</li>
+      <li>🔊 Real-time environment narration</li>
+      <li>📖 Text-to-speech for signs, screens, printed pages</li>
+      <li>🔍 Smart item-finding system</li>
+      <li>🤝 Community-driven improvements</li>
     </ul>
-
-    <p>
-      Together, these features aim to create one of the most practical and supportive AI 
-      wearable tools for individuals with low vision.
-    </p>
   </section>
 
-  <!-- CONTACT US -->
+  <!-- CONTACT -->
   <section id="contact">
     <h2>Contact Us</h2>
     <p>
-      For collaboration, support, or more information:<br>
+      For questions, collaboration, or support:<br>
       <strong>nikil26priv@gmail.com</strong>
     </p>
   </section>
@@ -167,14 +176,12 @@
   <!-- FOOTER -->
   <footer>
     <h3>Newsight</h3>
-    <p>Student-led nonprofit developing AI glasses for the vision-impaired community.</p>
-    <p>Contact us: <strong>nikil26priv@gmail.com</strong></p>
+    <p>Designed to make the world more accessible.</p>
+    <p><strong>nikil26priv@gmail.com</strong></p>
 
     <hr>
 
-    <p style="font-size: 0.85rem;">
-      © 2025 Newsight • All Rights Reserved
-    </p>
+    <p style="font-size: 0.85rem;">© 2025 Newsight • All Rights Reserved</p>
   </footer>
 
 </body>
