@@ -6,14 +6,21 @@
   <title>Newsight – AI Glasses for Vision Support</title>
 
   <style>
-    /* ---------- BASE ---------- */
+    /* ---------- BASE VARIABLES ---------- */
     :root {
-      --glass-bg: rgba(255, 255, 255, 0.16);
-      --glass-border: rgba(255, 255, 255, 0.55);
+      --bg-gradient: radial-gradient(circle at 0% 0%, #ffe8f3 0, #f6f8ff 35%, #e0f8ff 70%, #f5f6ff 100%);
+      --bg-gradient-dark: radial-gradient(circle at 0% 0%, #141929 0, #101625 35%, #050713 80%);
       --text-main: #1f2b3a;
       --text-soft: #5f6c80;
+      --text-main-dark: #f3f5ff;
+      --text-soft-dark: #9fa9d0;
+      --glass-bg: rgba(255, 255, 255, 0.16);
+      --glass-border: rgba(255, 255, 255, 0.55);
+      --glass-bg-dark: rgba(10, 14, 28, 0.75);
+      --glass-border-dark: rgba(139, 155, 210, 0.55);
       --accent: #6c8dff;
       --accent-soft: #edf1ff;
+      --accent-dark: #9caeff;
       --radius-lg: 22px;
       --transition-fast: 0.22s ease;
     }
@@ -28,9 +35,15 @@
         "Helvetica Neue", Arial, sans-serif;
       color: var(--text-main);
       line-height: 1.7;
-      background: radial-gradient(circle at 0% 0%, #ffe8f3 0, #f6f8ff 35%, #e0f8ff 70%, #f5f6ff 100%);
+      background: var(--bg-gradient);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    body.dark {
+      background: var(--bg-gradient-dark);
+      color: var(--text-main-dark);
     }
 
     a {
@@ -38,7 +51,6 @@
       text-decoration: none;
     }
 
-    /* ---------- LAYOUT WRAPPER ---------- */
     .page {
       max-width: 1100px;
       margin: 0 auto;
@@ -61,13 +73,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 18px;
+      padding: 10px 16px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.32);
       border: 1px solid rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       box-shadow: 0 14px 34px rgba(110, 140, 190, 0.22);
+      transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    body.dark .nav-glass {
+      background: rgba(10, 14, 28, 0.76);
+      border-color: rgba(150, 166, 230, 0.9);
+      box-shadow: 0 18px 40px rgba(5, 7, 14, 0.7);
     }
 
     .nav-left {
@@ -76,12 +95,32 @@
       gap: 10px;
     }
 
-    .logo-dot {
-      width: 30px;
-      height: 30px;
-      border-radius: 12px;
-      background: conic-gradient(from 200deg, #7ea8ff, #ffd6e7, #b3ffd5, #7ea8ff);
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 0 0, #7ea8ff, transparent 60%),
+        radial-gradient(circle at 100% 0, #ffd6e7, transparent 55%),
+        radial-gradient(circle at 100% 100%, #b3ffd5, transparent 55%),
+        #ffffff;
       box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: #28334a;
+    }
+
+    body.dark .logo-mark {
+      background:
+        radial-gradient(circle at 0 0, #7ea8ff, transparent 55%),
+        radial-gradient(circle at 100% 0, #ff8ccd, transparent 55%),
+        radial-gradient(circle at 100% 100%, #6ff5c0, transparent 55%),
+        #0b1223;
+      color: #f5f6ff;
+      box-shadow: 0 0 0 1px rgba(132, 146, 225, 0.9);
     }
 
     .nav-title {
@@ -92,12 +131,20 @@
       color: #28334a;
     }
 
+    body.dark .nav-title {
+      color: #f0f2ff;
+    }
+
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       font-size: 0.9rem;
       color: var(--text-soft);
+    }
+
+    body.dark .nav-links {
+      color: var(--text-soft-dark);
     }
 
     .nav-link {
@@ -108,13 +155,18 @@
     }
 
     .nav-link:hover {
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.85);
       color: #2a3a5e;
       transform: translateY(-1px);
     }
 
+    body.dark .nav-link:hover {
+      background: rgba(33, 42, 76, 0.95);
+      color: #e3e6ff;
+    }
+
     .nav-pill {
-      padding: 7px 14px;
+      padding: 7px 12px;
       border-radius: 999px;
       background: var(--accent-soft);
       color: #31427a;
@@ -125,6 +177,12 @@
       border: 1px solid rgba(146, 168, 255, 0.6);
     }
 
+    body.dark .nav-pill {
+      background: rgba(19, 28, 56, 0.9);
+      color: #d3daff;
+      border-color: rgba(156, 176, 255, 0.9);
+    }
+
     .nav-pill span {
       font-size: 0.78rem;
       padding: 4px 8px;
@@ -132,7 +190,42 @@
       background: white;
     }
 
-    /* ---------- HEADER HERO ---------- */
+    body.dark .nav-pill span {
+      background: #121b38;
+    }
+
+    /* Dark mode switch */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(170, 184, 220, 0.9);
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+
+    body.dark .theme-toggle {
+      background: rgba(17, 23, 46, 0.98);
+      border-color: rgba(138, 155, 232, 0.95);
+      color: #d2d7ff;
+    }
+
+    .theme-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffd86f, #ff9e7c);
+    }
+
+    body.dark .theme-dot {
+      background: radial-gradient(circle at 30% 30%, #d4e1ff, #4e64ff);
+    }
+
+    /* ---------- HERO ---------- */
     header.hero {
       margin-top: 40px;
       margin-bottom: 34px;
@@ -165,6 +258,12 @@
       margin-bottom: 12px;
     }
 
+    body.dark .hero-badge {
+      background: rgba(12, 18, 40, 0.95);
+      border-color: rgba(141, 155, 230, 0.9);
+      color: var(--text-soft-dark);
+    }
+
     .hero-badge-dot {
       width: 8px;
       height: 8px;
@@ -184,6 +283,10 @@
       max-width: 480px;
       color: var(--text-soft);
       margin-bottom: 22px;
+    }
+
+    body.dark .hero-subtitle {
+      color: var(--text-soft-dark);
     }
 
     .hero-actions {
@@ -223,9 +326,19 @@
       transition: background var(--transition-fast), transform var(--transition-fast);
     }
 
+    body.dark .btn-ghost {
+      background: rgba(15, 23, 50, 0.9);
+      border-color: rgba(134, 150, 225, 0.9);
+      color: var(--text-soft-dark);
+    }
+
     .btn-ghost:hover {
       background: rgba(255, 255, 255, 0.9);
       transform: translateY(-1px);
+    }
+
+    body.dark .btn-ghost:hover {
+      background: rgba(27, 36, 75, 0.95);
     }
 
     .hero-meta {
@@ -234,12 +347,19 @@
       color: #7b8599;
     }
 
+    body.dark .hero-meta {
+      color: var(--text-soft-dark);
+    }
+
     .hero-meta span {
       font-weight: 500;
       color: #4a5bb0;
     }
 
-    /* Hero glass card */
+    body.dark .hero-meta span {
+      color: #a3b1ff;
+    }
+
     .hero-card {
       border-radius: 30px;
       padding: 22px 20px;
@@ -251,6 +371,12 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
+    }
+
+    body.dark .hero-card {
+      background: radial-gradient(circle at 0 0, rgba(22, 28, 58, 0.98), rgba(14, 20, 46, 0.96));
+      border-color: rgba(152, 165, 239, 0.95);
+      box-shadow: 0 26px 60px rgba(5, 7, 18, 0.85);
     }
 
     .hero-chip-row {
@@ -268,6 +394,12 @@
       color: #4c5a88;
     }
 
+    body.dark .hero-chip {
+      background: rgba(17, 25, 63, 0.98);
+      border-color: rgba(154, 168, 245, 0.95);
+      color: #cfd6ff;
+    }
+
     .hero-metric {
       margin-top: 6px;
       display: flex;
@@ -277,9 +409,17 @@
       color: var(--text-soft);
     }
 
+    body.dark .hero-metric {
+      color: var(--text-soft-dark);
+    }
+
     .hero-metric strong {
       font-size: 1rem;
       color: #2c3d6a;
+    }
+
+    body.dark .hero-metric strong {
+      color: #dbe1ff;
     }
 
     .hero-divider {
@@ -288,9 +428,17 @@
       margin: 4px 0 6px;
     }
 
+    body.dark .hero-divider {
+      background: linear-gradient(to right, transparent, rgba(116, 130, 210, 0.9), transparent);
+    }
+
     .hero-note {
       font-size: 0.78rem;
       color: #76829c;
+    }
+
+    body.dark .hero-note {
+      color: var(--text-soft-dark);
     }
 
     /* ---------- GLASS SECTIONS ---------- */
@@ -306,11 +454,23 @@
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
     }
 
+    body.dark .glass-section {
+      background: var(--glass-bg-dark);
+      border-color: var(--glass-border-dark);
+      box-shadow: 0 22px 50px rgba(4, 6, 16, 0.82);
+    }
+
     .glass-section:hover {
       transform: translateY(-2px);
       border-color: rgba(255, 255, 255, 0.85);
       background: rgba(255, 255, 255, 0.22);
       box-shadow: 0 24px 54px rgba(120, 145, 205, 0.32);
+    }
+
+    body.dark .glass-section:hover {
+      background: rgba(18, 26, 62, 0.92);
+      border-color: rgba(170, 185, 255, 0.95);
+      box-shadow: 0 26px 60px rgba(1, 3, 12, 0.95);
     }
 
     .glass-section h2 {
@@ -328,8 +488,16 @@
       color: #8b94aa;
     }
 
+    body.dark .glass-section small {
+      color: #969fd0;
+    }
+
     .glass-section p {
       color: var(--text-soft);
+    }
+
+    body.dark .glass-section p {
+      color: var(--text-soft-dark);
     }
 
     .two-col {
@@ -358,6 +526,10 @@
       color: var(--text-soft);
     }
 
+    body.dark .feature-list li {
+      color: var(--text-soft-dark);
+    }
+
     .feature-list li::before {
       content: "•";
       position: absolute;
@@ -365,6 +537,10 @@
       top: 0;
       font-size: 1.1rem;
       color: #7a93ff;
+    }
+
+    body.dark .feature-list li::before {
+      color: #a4b0ff;
     }
 
     .tag-row {
@@ -383,7 +559,63 @@
       color: #5a6687;
     }
 
-    /* CONTACT */
+    body.dark .tag-pill {
+      border-color: rgba(147, 160, 230, 0.95);
+      background: rgba(17, 24, 60, 0.98);
+      color: #d0d6ff;
+    }
+
+    /* FAQ (uses <details>) */
+    .faq-list {
+      margin-top: 14px;
+    }
+
+    .faq-item {
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(222, 230, 255, 0.9);
+      margin-bottom: 10px;
+      padding: 10px 14px;
+    }
+
+    body.dark .faq-item {
+      background: rgba(14, 20, 55, 0.95);
+      border-color: rgba(148, 164, 245, 0.95);
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #28334a;
+    }
+
+    body.dark .faq-item summary {
+      color: #e1e5ff;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "＋";
+      float: right;
+      font-weight: 600;
+      color: #7a88c0;
+    }
+
+    .faq-item[open] summary::after {
+      content: "–";
+    }
+
+    .faq-item p {
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    /* CONTACT LINE */
     .contact-line {
       margin-top: 10px;
       display: flex;
@@ -394,6 +626,10 @@
       color: var(--text-soft);
     }
 
+    body.dark .contact-line {
+      color: var(--text-soft-dark);
+    }
+
     .contact-chip {
       padding: 7px 12px;
       border-radius: 999px;
@@ -401,6 +637,12 @@
       border: 1px solid rgba(210, 220, 255, 0.85);
       font-weight: 500;
       color: #34416d;
+    }
+
+    body.dark .contact-chip {
+      background: rgba(15, 23, 55, 0.98);
+      border-color: rgba(145, 160, 240, 0.95);
+      color: #dde2ff;
     }
 
     /* FOOTER */
@@ -413,8 +655,86 @@
       text-align: center;
     }
 
+    body.dark footer {
+      border-color: rgba(74, 86, 135, 0.95);
+      color: #949fd0;
+    }
+
     footer strong {
       color: #45527a;
+    }
+
+    body.dark footer strong {
+      color: #dae0ff;
+    }
+
+    /* FLOATING CONTACT BUTTON */
+    .floating-contact {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 30;
+    }
+
+    .floating-contact button {
+      border: none;
+      border-radius: 999px;
+      padding: 11px 18px;
+      background: linear-gradient(135deg, #6e8bff, #ff9bd5);
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 500;
+      box-shadow: 0 16px 40px rgba(107, 80, 178, 0.45);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .floating-contact button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+      box-shadow: 0 20px 46px rgba(107, 80, 178, 0.6);
+    }
+
+    .floating-contact-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    /* REVEAL ANIMATION */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      .nav-glass {
+        gap: 8px;
+      }
+      .nav-links {
+        gap: 10px;
+        font-size: 0.8rem;
+      }
+      .nav-pill {
+        display: none;
+      }
+      .theme-toggle {
+        padding-inline: 8px;
+      }
     }
   </style>
 </head>
@@ -422,27 +742,27 @@
 <body>
   <div class="page">
     <!-- NAVBAR -->
-    <div class="nav">
+    <div class="nav reveal">
       <div class="nav-glass">
         <div class="nav-left">
-          <div class="logo-dot"></div>
+          <div class="logo-mark">NS</div>
           <div class="nav-title">NEWSIGHT</div>
         </div>
         <div class="nav-links">
           <div class="nav-link"><a href="#about">About</a></div>
           <div class="nav-link"><a href="#version1">Version 1</a></div>
           <div class="nav-link"><a href="#roadmap">Roadmap</a></div>
-          <div class="nav-link"><a href="#contact">Contact</a></div>
-          <div class="nav-pill">
-            Nonprofit
-            <span>Student-led</span>
+          <div class="nav-link"><a href="#faq">FAQ</a></div>
+          <div class="theme-toggle" id="themeToggle">
+            <div class="theme-dot"></div>
+            <span>Dark</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- HERO -->
-    <header class="hero">
+    <header class="hero reveal">
       <div class="hero-text">
         <div class="hero-badge">
           <div class="hero-badge-dot"></div>
@@ -492,7 +812,7 @@
     </header>
 
     <!-- ABOUT -->
-    <section id="about" class="glass-section">
+    <section id="about" class="glass-section reveal">
       <small>About</small>
       <h2>About Newsight</h2>
       <p>
@@ -510,7 +830,7 @@
     </section>
 
     <!-- VERSION 1 -->
-    <section id="version1" class="glass-section">
+    <section id="version1" class="glass-section reveal">
       <small>Prototype</small>
       <h2>Newsight Glasses — Version 1 (GLV-024P)</h2>
       <p>
@@ -549,12 +869,13 @@
     </section>
 
     <!-- ROADMAP -->
-    <section id="roadmap" class="glass-section">
+    <section id="roadmap" class="glass-section reveal">
       <small>Roadmap</small>
       <h2>Project Roadmap</h2>
       <p>
-        Newsight is growing from an early idea into a practical accessibility
-        tool. Here’s the journey so far — and where we’re heading next.
+        Newsight has grown from a simple idea into a developing assistive-technology
+        initiative. Our roadmap highlights how the project began, the research behind it,
+        the work currently underway, and our next major steps.
       </p>
 
       <div class="two-col" style="margin-top: 20px;">
@@ -562,8 +883,8 @@
           <h3>Completed</h3>
           <ul class="feature-list">
             <li><strong>Idea started – 2024:</strong> Newsight began as a student-led initiative to create affordable AI glasses for people with low vision.</li>
-            <li><strong>Consulted specialists – 2024:</strong> Early discussions with accessibility experts and vision-impairment specialists validated the concept.</li>
-            <li><strong>Research ongoing:</strong> Studying AI models, hardware constraints, and user needs to guide technical development.</li>
+            <li><strong>Consulted specialists – 2024:</strong> Early conversations with accessibility and vision-impairment experts helped validate and shape the idea.</li>
+            <li><strong>Research ongoing:</strong> Studying AI models, user needs, hardware limitations, and accessibility requirements to guide development.</li>
           </ul>
         </div>
 
@@ -584,8 +905,51 @@
       </div>
     </section>
 
+    <!-- FAQ -->
+    <section id="faq" class="glass-section reveal">
+      <small>FAQ</small>
+      <h2>Frequently Asked Questions</h2>
+      <p>
+        A quick overview of what Newsight is, who it is for, and how the project will evolve.
+      </p>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Who is Newsight designed for?</summary>
+          <p>
+            Newsight is aimed at people with low vision or partial sight who would benefit from
+            navigation help, object recognition, and text-to-speech while staying hands-free.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>How is Newsight different from other smart glasses?</summary>
+          <p>
+            Our focus is strictly on accessibility: simple audio feedback, reliable recognition,
+            and affordability. We prioritize assistive features over entertainment or general AR.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is the project open to collaboration?</summary>
+          <p>
+            Yes. We welcome developers, researchers, and members of the vision-impaired community
+            who want to test, co-design, or improve our features.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>When will hardware beyond the GLV-024P be available?</summary>
+          <p>
+            A dedicated Newsight hardware model is part of our next development phase after
+            we refine our software features and usability on the GLV-024P platform.
+          </p>
+        </details>
+      </div>
+    </section>
+
     <!-- CONTACT -->
-    <section id="contact" class="glass-section">
+    <section id="contact" class="glass-section reveal">
       <small>Contact</small>
       <h2>Contact & Collaboration</h2>
       <p>
@@ -600,12 +964,59 @@
     </section>
 
     <!-- FOOTER -->
-    <footer>
+    <footer class="reveal">
       <div>
-        © 2025 <strong>Newsight</strong> · Student-led nonprofit project using AI glasses 
+        © 2025 <strong>Newsight</strong> · Student-led nonprofit project using AI glasses
         to support the vision-impaired community.
       </div>
     </footer>
   </div>
+
+  <!-- FLOATING CONTACT BUTTON -->
+  <div class="floating-contact">
+    <button onclick="window.location.href='mailto:nikil26priv@gmail.com?subject=Newsight%20Inquiry'">
+      <div class="floating-contact-icon">✉︎</div>
+      Contact Newsight
+    </button>
+  </div>
+
+  <!-- JS: DARK MODE + REVEAL ANIMATIONS -->
+  <script>
+    // Dark mode toggle
+    const toggle = document.getElementById("themeToggle");
+    const body = document.body;
+
+    // Load saved preference
+    if (window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches &&
+        !localStorage.getItem('newsight-theme')) {
+      body.classList.add('dark');
+    }
+
+    const savedTheme = localStorage.getItem('newsight-theme');
+    if (savedTheme === 'dark') body.classList.add('dark');
+
+    toggle.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      localStorage.setItem("newsight-theme", body.classList.contains("dark") ? "dark" : "light");
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
+
